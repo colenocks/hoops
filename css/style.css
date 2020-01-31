@@ -1,11 +1,13 @@
 :root {
   --bg_imageURL: url("https://cdn3.vectorstock.com/i/1000x1000/61/97/cartoon-background-of-street-basketball-vector-22886197.jpg");
   --bg_entryURL: url("https://media.gettyimages.com/vectors/basketball-background-male-athlete-vector-id472316323");
+  --kobeBryant_image: url("https://www.iwallpaper.org/download/kobe-bryant-wallpaper-890.jpg");
 }
 
 * {
   padding: 0;
   margin: 0;
+  border: 0;
   box-sizing: border-box;
 }
 
@@ -28,24 +30,113 @@ header {
 
 .container {
   position: relative;
-  margin: 0 auto;
   width: 100%;
   padding: 20px 20px 70px 20px;
 }
 
-.input-name {
-  margin: 10px auto;
+.entry {
+  text-align: center;
 }
 
-.wrapper {
+.entry input {
+  display: block;
+  margin: 3% auto;
+  font-size: 18px;
+  padding: 1%;
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  background-color: #988;
+  border: 1px solid #fff;
+}
+input[type="text"]:focus {
+  background-color: #fff;
+}
+
+input[type="submit"] {
+  background-color: #037c03;
+  color: #fff;
+  opacity: 0.7;
+}
+input[type="submit"]:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Load icon */
+.kobe {
+  display: none;
   position: relative;
-  background: var(--bg_imageURL);
+  background: var(--kobeBryant_image);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 500px;
-  width: 100%;
+  background-position: center;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  height: 600px;
+  max-width: 100%;
   color: #fff;
   padding-bottom: 50px;
+}
+
+.load-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #101011;
+  border-bottom: 5px solid #f5f23b;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Game Wrapper*/
+.wrapper {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 500px;
+  max-width: 100%;
+  color: #fff;
+  padding-bottom: 50px;
+}
+
+/* Game Section */
+
+/* Controller Section */
+.controller {
+}
+
+#shoot-bar {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  height: 10px;
+  width: 150px;
+  outline: 1px #fff solid;
 }
 
 footer {
@@ -53,7 +144,7 @@ footer {
   bottom: 0px;
   width: 100%;
   height: 50px;
-  background: #333;
+  border-top: 1px solid #988;
   text-align: center;
 }
 
