@@ -4,13 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font awesome CDN-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.11/css/all.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
-    <title>HOOPS</title>
+    <title>Hoops</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="img/hoop-icon(180x180).jpg"
+    />
   </head>
   <body>
-    <div class="wrapper"></div>
+    <div class="kobe">
+      <div class="load-icon"></div>
+    </div>
+    <section class="wrapper">
+      <section class="game">
+        <div class="ball"><i class="fas fa-basketball-ball fa-3x"></i></div>
+        <div class="hoop">
+          <div class="ring"></div>
+          <div class="left-brace"></div>
+          <div class="net"></div>
+          <div class="right-brace"></div>
+        </div>
+      </section>
+      <section class="controller">
+        <div id="shoot-bar"></div>
+        <button class="shoot">Shoot</button>
+        <button class="bounce">Bounce</button>
+        <div id="timer"></div>
+        <div id="control">
+          <div class="direction-spin">
+            <button class="spin-backward">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button class="up"><i class="fas fa-caret-up"></i></button>
+            <button class="down"><i class="fas fa-caret-down"></i></button>
+            <button class="spin-forward"><i class="fas fa-forward"></i></button>
+          </div>
+        </div>
+      </section>
+    </section>
     <footer>
       <p>Created by icardi</p>
     </footer>
+    <script src="js/app.js"></script>
   </body>
 </html>
