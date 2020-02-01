@@ -23,6 +23,8 @@
     </div>
     <section class="wrapper">
       <section class="game">
+        <progress max="10" value="0" class="shoot-bar"></progress>
+        <!-- <div class="shoot-bar"></div> -->
         <div class="ball">
           <i class="fas fa-basketball-ball fa-2x"></i>
         </div>
@@ -35,20 +37,21 @@
         </div>
       </section>
       <section class="controller">
-        <div id="shoot-bar"></div>
+        <button class="gauge">Power</button>
         <button class="shoot">Shoot</button>
-        <button class="bounce">Bounce</button>
-        <div id="timer"></div>
-        <div id="control">
-          <div class="direction-spin">
-            <button class="spin-backward">
-              <i class="fas fa-backward"></i>
-            </button>
-            <button class="up"><i class="fas fa-caret-up"></i></button>
-            <button class="down"><i class="fas fa-caret-down"></i></button>
-            <button class="spin-forward"><i class="fas fa-forward"></i></button>
-          </div>
-        </div>
+        <div class="timer"><p>180</p></div>
+        <!-- <div class="control"> -->
+        <button class="spin-backward">
+          <i class="fas fa-backward fa-2x"></i>
+        </button>
+        <button class="up"><i class="fas fa-caret-up fa-2x"></i></button>
+        <button class="down">
+          <i class="fas fa-caret-down fa-2x"></i>
+        </button>
+        <button class="spin-forward">
+          <i class="fas fa-forward fa-2x"></i>
+        </button>
+        <!-- </div> -->
       </section>
     </section>
     <footer>
