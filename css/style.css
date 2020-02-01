@@ -1,7 +1,8 @@
 * {
   padding: 0;
   margin: 0;
-  border: 0;
+  border: none;
+  outline: 0;
   box-sizing: border-box;
 }
 
@@ -32,6 +33,26 @@ header {
   position: relative;
   width: 100%;
   padding: 20px 20px 70px 20px;
+}
+
+button {
+  cursor: pointer;
+  padding: 1%;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: 0;
+  /* font-size: 0.95rem; */
+}
+button:hover {
+  /* transform: scale(1.2); */
+  color: #fff;
+  background-color: #03547c;
+}
+button:focus {
+  outline: 0;
+}
+button::-moz-focus-inner {
+  border: 0;
 }
 
 .entry {
@@ -123,7 +144,7 @@ input[type="submit"]:hover {
   color: #fff;
   margin: 1%;
   padding-bottom: 70px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 /* Game Section */
@@ -136,20 +157,30 @@ input[type="submit"]:hover {
   margin-bottom: 2%;
   padding: 2%;
 }
+.shoot-bar {
+  /* grid-area: bar; */
+  position: absolute;
+  bottom: 12%;
+  left: -6%;
+  height: 10px;
+  width: 100px;
+  transform: rotate(-90deg);
+  border: 1px #fff solid;
+}
 .ball {
   position: absolute;
   bottom: 2%;
-  left: 2%;
+  left: 5%;
   color: #ff9d00;
-  animation: bounce 4s ease-out 2;
+  animation: bounce 2s ease-out 2;
 }
 
 @keyframes bounce {
   0% {
-    bottom: 3%;
+    bottom: 2%;
   }
   50% {
-    top: 70%;
+    bottom: 30%;
   }
   100% {
     bottom: 2%;
@@ -196,26 +227,70 @@ input[type="submit"]:hover {
   height: 100px;
   max-width: 600px;
   margin: auto;
+  padding: 1%;
   border: 1px #fff solid;
+  display: grid;
+  /* justify-items: center; */
+  grid-template-columns: auto 1fr 1fr 4fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 2%;
+  grid-template-areas:
+    "bar . . space . up ."
+    "bar gauge shoot space back . forward"
+    "bar . . space . down .";
 }
 
-#shoot-bar {
-  position: absolute;
-  bottom: 0;
-  left: 20px;
-  height: 10px;
-  width: 150px;
-  border: 1px #fff solid;
+.timer {
+  grid-area: space;
+  display: flex;
+  align-items: center;
+  border: 1px solid #fff;
+  text-align: center;
+  height: 50px;
+  width: 50px;
+  margin: auto;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #101011, #f5f23b);
+}
+.timer p {
+  margin: auto;
+  font-weight: bold;
 }
 
+/* grid-auto-rows: minmax(min-content, max-content); */
+
+.shoot {
+  grid-area: shoot;
+}
+
+.gauge {
+  grid-area: gauge;
+}
+
+.control {
+  /* grid-area: shoot; */
+}
+
+.spin-forward {
+  grid-area: forward;
+}
+.spin-backward {
+  grid-area: back;
+}
+.up {
+  grid-area: up;
+}
+.down {
+  grid-area: down;
+}
 footer {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
   height: 50px;
   border-top: 1px solid #988;
   text-align: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 footer p {
