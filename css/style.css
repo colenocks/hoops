@@ -1,14 +1,14 @@
-:root {
-  --bg_imageURL: url("https://cdn3.vectorstock.com/i/1000x1000/61/97/cartoon-background-of-street-basketball-vector-22886197.jpg");
-  --bg_entryURL: url("https://media.gettyimages.com/vectors/basketball-background-male-athlete-vector-id472316323");
-  --kobeBryant_image: url("https://www.iwallpaper.org/download/kobe-bryant-wallpaper-890.jpg");
-}
-
 * {
   padding: 0;
   margin: 0;
   border: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --bg_imageURL: url("https://cdn3.vectorstock.com/i/1000x1000/61/97/cartoon-background-of-street-basketball-vector-22886197.jpg");
+  --bg_entryURL: url("https://media.gettyimages.com/vectors/basketball-background-male-athlete-vector-id472316323");
+  --kobeBryant_image: url("https://www.iwallpaper.org/download/kobe-bryant-wallpaper-890.jpg");
 }
 
 body {
@@ -118,16 +118,85 @@ input[type="submit"]:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 500px;
+  min-height: 500px;
   max-width: 100%;
   color: #fff;
-  padding-bottom: 50px;
+  margin: 1%;
+  padding-bottom: 70px;
+  border: 1px solid red;
 }
 
 /* Game Section */
+.game {
+  position: relative;
+  height: 400px;
+  max-width: 700px;
+  margin: auto;
+  border: 1px #fff solid;
+  margin-bottom: 2%;
+  padding: 2%;
+}
+.ball {
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  color: #ff9d00;
+  animation: bounce 4s ease-out 2;
+}
+
+@keyframes bounce {
+  0% {
+    bottom: 3%;
+  }
+  50% {
+    top: 70%;
+  }
+  100% {
+    bottom: 2%;
+  }
+}
+
+.hoop {
+  position: absolute;
+  top: 20%;
+  right: 2%;
+  height: 80px;
+  width: 90px;
+  border: 1px dotted #fff;
+  border-right: 10px solid #fff;
+}
+.rail {
+  position: absolute;
+  bottom: 5%;
+  right: 2px;
+  background-color: #f5f23b;
+  width: 85px;
+  height: 6px;
+}
+.left-brace {
+  position: absolute;
+  bottom: -56px;
+  left: 6px;
+  background-color: #fff;
+  height: 60px;
+  width: 3px;
+}
+.right-brace {
+  position: absolute;
+  bottom: -56px;
+  right: 16px;
+  background-color: #fff;
+  height: 60px;
+  width: 3px;
+}
 
 /* Controller Section */
 .controller {
+  position: relative;
+  height: 100px;
+  max-width: 600px;
+  margin: auto;
+  border: 1px #fff solid;
 }
 
 #shoot-bar {
@@ -136,18 +205,19 @@ input[type="submit"]:hover {
   left: 20px;
   height: 10px;
   width: 150px;
-  outline: 1px #fff solid;
+  border: 1px #fff solid;
 }
 
 footer {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
   height: 50px;
   border-top: 1px solid #988;
   text-align: center;
+  border: 1px solid red;
 }
 
 footer p {
-  margin: 2% auto;
+  padding-top: 1%;
 }

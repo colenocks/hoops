@@ -7,6 +7,11 @@ let kobe = document.querySelector(".kobe");
 let wrapper = document.querySelector(".wrapper");
 // wrapper.style.display = "none";
 
+let rail = document.querySelector(".rail");
+let basket = rail.getBoundingClientRect();
+
+// console.log(rect);
+// console.log(window.scrollY);
 function loading() {
   setTimeout(() => {
     loadIcon.style.display = "none";
@@ -14,3 +19,5 @@ function loading() {
     wrapper.style.display = "block";
   }, 3000);
 }
+
+// alert(window.innerHeight);
