@@ -20,6 +20,8 @@ function loading() {
   }, 3000);
 }
 
+// loading();
+
 let button = document.querySelectorAll("button");
 for (let btn = 0; btn < button.length; btn++) {
   button[btn].onclick = function() {
@@ -31,15 +33,21 @@ for (let btn = 0; btn < button.length; btn++) {
 }
 
 /* Gauging bar */
-let guageBtn = document.querySelector(".gauge");
+let powerGaugeBtn = document.querySelector(".gauge");
 let bar = document.querySelector(".shoot-bar");
 let barVal = bar.getAttribute("value");
 let barMax = bar.getAttribute("max");
 let count = 0;
-guageBtn.onclick = function() {
-  if (barVal != barMax) {
-    count++;
-    bar.setAttribute("value", count);
+
+window.addEventListener("keypress", function() {
+  if (event.code == "KeyQ" && barVal < barMax) {
+    bar.setAttribute("value", (count += 5));
   }
-};
+});
+
+// powerGaugeBtn.addEventListener("mousedown", function() {
+//   if (barVal < barMax) {
+//     bar.setAttribute("value", (count += 5));
+//   }
+// });
 // alert(window.innerHeight);
