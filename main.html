@@ -23,28 +23,33 @@
     </div>
     <section class="wrapper">
       <section class="game">
-        <progress max="100" value="0" class="shoot-bar"></progress>
         <!-- <div class="shoot-bar"></div> -->
-        <div class="semi">
-          <div class="stick">
-            <div class="arrow"></div>
-          </div>
-        </div>
+        <div class="timer"><p>180</p></div>
         <div class="ball">
           <i class="fas fa-basketball-ball fa-2x"></i>
         </div>
+        <div class="platform"></div>
 
         <div class="hoop">
-          <div class="rail"></div>
+          <div class="left-rail"></div>
+          <div class="right-rail"></div>
           <div class="left-brace"></div>
           <div class="net"></div>
           <div class="right-brace"></div>
         </div>
       </section>
+      <canvas></canvas>
       <section class="controller">
+        <progress max="100" value="0" class="shoot-bar"></progress>
         <button class="gauge">Power</button>
         <button class="shoot">Shoot</button>
-        <div class="timer"><p>180</p></div>
+        <div class="meter">
+          <div class="angle-meter">
+            <div class="stick">
+              <div class="arrow"></div>
+            </div>
+          </div>
+        </div>
         <!-- <div class="control"> -->
         <button class="spin-backward">
           <i class="fas fa-backward fa-2x"></i>
