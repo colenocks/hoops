@@ -309,6 +309,8 @@ canvas {
   height: 50px;
   border-right: 50px solid #fff;
   border-top-right-radius: 100px;
+  border-left: 50px solid #fff;
+  border-top-left-radius: 100px;
 }
 
 .arrow {
@@ -319,17 +321,19 @@ canvas {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-left: 6px solid #037c03;
-  left: 52px;
+  left: 51px;
   top: 43px;
   animation: arrow-anim 2s linear 1;
 }
 
 .stick {
   position: absolute;
+  top: 1px;
   left: 0;
   --velocity_angle: -50deg;
+  background-color: red;
   /* --velocity:  */
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid #000;
   width: 50px;
   height: 50px;
   transform-origin: bottom left;
