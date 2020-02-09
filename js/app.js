@@ -1,4 +1,7 @@
+import * as projectile from "./projectile.js";
 window.onload = function() {
+  const properties = new projectile.Projectile();
+
   let loadIcon = document.querySelector(".load-icon");
   let kobe = document.querySelector(".kobe");
   let wrapper = document.querySelector(".wrapper");
@@ -30,14 +33,14 @@ window.onload = function() {
 
   /* Gauging bar */
   let powerGaugeBtn = document.querySelector(".gauge");
-  let bar = document.querySelector(".shoot-bar");
-  let barVal = bar.getAttribute("value");
-  let barMax = bar.getAttribute("max");
+  let shootBar = document.querySelector(".shoot-bar");
+  let shootBarVal = shootBar.getAttribute("value");
+  let shootBarMax = shootBar.getAttribute("max");
   let count = 0;
 
   window.addEventListener("keypress", function() {
-    if (event.code == "KeyQ" && barVal < barMax) {
-      bar.setAttribute("value", (count += 5));
+    if (event.code == "KeyQ" && shootBarVal < shootBarMax) {
+      shootBar.setAttribute("value", (count += 5));
     }
   });
 
@@ -49,24 +52,15 @@ window.onload = function() {
 
   const gravity = 1;
   const friction = 0.99;
-  let platform,
-    ball,
-    board,
-    left_rim,
-    right_rim,
-    left_net,
-    right_net,
-    timer;
-
   /* ------------------------------------------- */
   class Circle {
-    constructor(x, y, vx, vy, radius, color) {
-      this.x = x;
-      this.y = y;
+    constructor(vx, vy, color) {
+      this.x = 36;
+      this.y = 280;
       this.velx = vx;
       this.vely = vy;
       this.vel = Math.sqrt(Math.pow(this.velx, 2) + Math.pow(this.vely, 2));
-      this.radius = radius;
+      this.radius = 14;
       this.color = color;
       this.restitution = -0.89;
 
@@ -106,6 +100,10 @@ window.onload = function() {
           this.vely = 0;
         }
 
+        // //check collision
+        // for (let i = 0; i < rim.length; i++) {
+        //   collision(ball, rim[i]);
+        // }
         // add gravity
         this.vely += gravity;
 
@@ -141,9 +139,77 @@ window.onload = function() {
         { x: this.posx, y: this.yy },
         { x: this.xx, y: this.yy }
       ];
+      // this.tophit = false;
+      // this.lefthit = false;
+      // this.righthit = false;
+      // this.bottomhit = false;
+
       this.update = function() {
         this.draw();
-       
+
+        //LEFT
+        if (
+          ball.x + ball.radius > this.posx &&
+          ball.x + ball.radius < this.xx &&
+          ball.y > this.posy &&
+          ball.y < this.yy
+          // !this.righthit
+        ) {
+          ball.x = this.posx - ball.radius;
+          ball.velx = -ball.velx;
+          // console.log("left of " + this.name);
+          //   this.lefthit = true;
+          // } else {
+          //   this.lefthit = false;
+        }
+
+        //Top
+        if (
+          ball.y + ball.radius > this.posy &&
+          ball.y + ball.radius < this.yy &&
+          ball.x > this.posx &&
+          ball.x < this.xx
+          // !this.bottomhit
+        ) {
+          ball.y = this.posy - ball.radius;
+          ball.vely = -ball.vely;
+          // console.log("top of " + this.name);
+          //   this.tophit = true;
+          // } else {
+          //   this.tophit = false;
+        }
+
+        //RIGHT
+        if (
+          ball.x - ball.radius < this.xx &&
+          ball.x - ball.radius > this.posx &&
+          ball.y > this.posy &&
+          ball.y < this.yy
+          // !this.lefthit
+        ) {
+          ball.x = this.xx + ball.radius;
+          ball.velx = -ball.velx;
+          // console.log("right of " + this.name);
+          //   this.righthit = true;
+          // } else {
+          //   this.righthit = false;
+        }
+
+        //Bottom
+        if (
+          ball.y - ball.radius < this.yy &&
+          ball.y - ball.radius > this.posy &&
+          ball.x > this.posx &&
+          ball.x < this.xx
+          // !this.tophit
+        ) {
+          ball.y = this.yy + ball.radius;
+          ball.vely = -ball.vely;
+          // console.log("bottom of " + this.name);
+          //   this.bottomhit = true;
+          // } else {
+          //   this.bottomhit = false;
+        }
       };
 
       this.draw = function() {
@@ -154,22 +220,18 @@ window.onload = function() {
     }
   }
 
-  function getDistance(ballX, ballY, hoopX, hoopY) {
-    let distance_x = hoopX - ballX;
-    let distance_y = hoopY - ballY;
-    return Math.sqrt(Math.pow(distance_x, 2) + Math.pow(distance_y, 2));
-  }
-
+  let platform, ball, board, left_rim, right_rim, left_net, right_net;
+  let vy = 24.8;
+  let vx = 13;
   function init() {
-    timer = new Circle(30, 30, 0, 0, 30, "#fff");
-    ball = new Circle(36, 280, 15, 34, 14, "#ff9d00");
+    ball = new Circle(vx, vy, "#ff9d00");
+    console.log(ball.vel.toFixed(2));
     platform = new Rectangle("platform", 0, 300, 60, 5, "#000");
-    board = new Rectangle("board", 273, 240, 8, 100, "#888");
+    board = new Rectangle("board", 570, 40, 8, 100, "#888");
     left_rim = new Rectangle("left_Rim", 462, 120, 20, 8, "blue");
     right_rim = new Rectangle("right_rim", 544, 120, 20, 8, "blue");
     left_net = new Rectangle("left_net", 482, 120, 8, 100, "#fff");
-    right_net = new Rectangle("left_net", 536, 120, 8, 100, "#fff");
-    // }
+    right_net = new Rectangle("right_net", 536, 120, 8, 100, "#fff");
   }
 
   function animate() {
@@ -183,8 +245,7 @@ window.onload = function() {
     left_net.update();
     right_net.update();
 
-    writeText("X:" + mouse.x + ", Y:" + mouse.y, mouse.x, mouse.y);
-    writeText("Time : " + countdown(), 10, 30);
+    writeText("Time: " + time, 10, 30);
   }
 
   function writeText(text, x, y) {
@@ -197,16 +258,23 @@ window.onload = function() {
   }
 
   let time = 180;
-  function countdown() {
-    let clock = setInterval(() => {
-      time--;
-      if(time == 0){
-        clearInterval(clock);
-      }
-    }, 2000);
-    return time;
-  }
+  // let displayTime = ;
+  let clock = setInterval(() => {
+    time--;
+    if (time == 0) {
+      clearInterval(clock);
+      time = "Time up!";
+    }
+  }, 1000);
 
   init();
   animate();
+
+  // show me the angle
+  let rotation = ((Math.atan2(vy, vx) * 180) / Math.PI).toFixed(2);
+  let vAngle = -rotation + "deg";
+  console.log(rotation);
+
+  properties.setAngle(vAngle);
+  console.log(properties.getAngle());
 };
