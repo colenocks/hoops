@@ -87,8 +87,8 @@ input[type="submit"]:hover {
 }
 
 /* Load icon */
-.kobe {
-  display: none;
+.loading {
+  /* display: none; */
   position: relative;
   background: var(--kobeBryant_image);
   background-size: cover;

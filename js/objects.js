@@ -113,7 +113,7 @@ function objectCollision(ball, rim) {
     ball.y > rim.posy &&
     ball.y < rim.yy
   ) {
-    rim.hitleft = true;
+    rim.hitleft = true; //this prevents tunneling thru the left
     ball.x = rim.posx - ball.radius;
     ball.velx = -ball.velx;
   }
@@ -125,14 +125,14 @@ function objectCollision(ball, rim) {
     ball.x > rim.posx &&
     ball.x < rim.xx
   ) {
-    rim.hittop = true;
+    rim.hittop = true; //this prevents tunneling thru the top
     ball.y = rim.posy - ball.radius;
     ball.vely = -ball.vely /* * ball.restitution */;
   }
 
   //RIGHT
   if (
-    !rim.hitleft &&
+    !rim.hitleft && //this prevents tunneling through right
     ball.x - ball.radius < rim.xx &&
     ball.x - ball.radius > rim.posx &&
     ball.y > rim.posy &&
@@ -144,7 +144,7 @@ function objectCollision(ball, rim) {
 
   //Bottom
   if (
-    !rim.hittop &&
+    !rim.hittop && //this prevents tunneling through the bottom
     ball.y - ball.radius < rim.yy &&
     ball.y - ball.radius > rim.posy &&
     ball.x > rim.posx &&
@@ -155,3 +155,12 @@ function objectCollision(ball, rim) {
   }
 }
 export { Circle, Rectangle, objectCollision, wallCollision };
+
+/* Tunneling happens when the velocity/speed of the ball towards an obstacle is much that the ball quickly moves throught the edge and prevents the code engine from detecting the collision on that side
+
+This causes an abnormal/ non realistic movement of the ball off the edge.
+
+Continuous Collision Detection (CCD)
+by Jon (Updated on 2015-10-18)
+Stencyl
+http://www.stencyl.com/help/view/continuous-collision-detection/*/
