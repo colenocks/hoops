@@ -38,21 +38,24 @@ Projectile.prototype = {
         time = roots[x];
       }
     }
-    return time;
+    return time; //in seconds;
   },
 
   DistanceVx: function(velocity_x, time) {
     let distance_x = 0;
     distance_x = velocity_x * time;
     return distance_x;
+  },
+
+  getDistance: function(ballX, ballY, hoopX, hoopY) {
+    let distance_x = hoopX - ballX;
+    let distance_y = hoopY - ballY;
+    return {
+      distance: Math.hypot(distance_x, distance_y),
+      x: distance_x,
+      y: distance_y
+    };
   }
 };
-
-// powerGaugeBtn.addEventListener("mousedown", function() {
-//   if (barVal < barMax) {
-//     bar.setAttribute("value", (count += 5));
-//   }
-// });
-// alert(window.innerHeight);
 
 export { Projectile };
