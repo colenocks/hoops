@@ -1,4 +1,6 @@
 /* -----------GLOBAL SETTINGS------------- */
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 const canvasWidth = 580;
 const canvasHeight = 400;
 const gravity = 1;
@@ -10,6 +12,8 @@ const ballColor = "#ff9d00";
 const ballCOR = -0.89; //coefficient of restitution
 
 export {
+  canvas,
+  ctx,
   canvasHeight,
   canvasWidth,
   gravity,
