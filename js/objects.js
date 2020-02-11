@@ -107,51 +107,67 @@ function objectCollision(ball, rim) {
   if (
     // ball.x > this.posx &&
     // ball.x < this.xx &&
-    ball.x + ball.radius > rim.posx &&
-    ball.x + ball.radius < rim.xx &&
+    // !rim.hitRight &&
+    ball.x + ball.radius >= rim.posx &&
+    ball.x + ball.radius <= rim.xx &&
     // ball.x > rim.xx &&
     ball.y > rim.posy &&
     ball.y < rim.yy
   ) {
     rim.hitleft = true; //this prevents tunneling thru the left
     ball.x = rim.posx - ball.radius;
-    ball.velx = -ball.velx;
+    ball.velx = -ball.velx * myGlobal.steelCOR;
+    // rim.hitright = false;
+  } else {
+    rim.hitleft = false;
   }
 
   //Top
   if (
-    ball.y + ball.radius > rim.posy &&
-    ball.y + ball.radius < rim.yy &&
+    // !rim.hitBottom &&
+    ball.y + ball.radius >= rim.posy &&
+    ball.y + ball.radius <= rim.yy &&
     ball.x > rim.posx &&
     ball.x < rim.xx
   ) {
     rim.hittop = true; //this prevents tunneling thru the top
     ball.y = rim.posy - ball.radius;
-    ball.vely = -ball.vely /* * ball.restitution */;
+    ball.vely = -ball.vely * myGlobal.steelCOR;
+    // rim.hitbottom = false;
+  } else {
+    rim.hittop = false;
   }
 
   //RIGHT
   if (
     !rim.hitleft && //this prevents tunneling through right
-    ball.x - ball.radius < rim.xx &&
-    ball.x - ball.radius > rim.posx &&
+    ball.x - ball.radius <= rim.xx &&
+    ball.x - ball.radius >= rim.posx &&
     ball.y > rim.posy &&
     ball.y < rim.yy
   ) {
+    // rim.hitright = true;
     ball.x = rim.xx + ball.radius;
-    ball.velx = -ball.velx;
+    ball.velx = -ball.velx * myGlobal.steelCOR;
+    // rim.hitleft = false;
+  } else {
+    rim.hitleft = true;
   }
 
   //Bottom
   if (
     !rim.hittop && //this prevents tunneling through the bottom
-    ball.y - ball.radius < rim.yy &&
-    ball.y - ball.radius > rim.posy &&
+    ball.y - ball.radius <= rim.yy &&
+    ball.y - ball.radius >= rim.posy &&
     ball.x > rim.posx &&
     ball.x < rim.xx
   ) {
+    // rim.hitbottom = true;
     ball.y = rim.yy + ball.radius;
-    ball.vely = -ball.vely;
+    ball.vely = -ball.vely * myGlobal.steelCOR;
+    // rim.hittop = false;
+  } else {
+    rim.hittop = true;
   }
 }
 export { Circle, Rectangle, objectCollision, wallCollision };

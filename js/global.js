@@ -7,9 +7,10 @@ const gravity = 1;
 const friction = 0.99;
 const startingPosx = 36; //ball position x
 const startingPosy = 280; //ball position y
-const ballRadius = 14;
+const ballRadius = 12;
 const ballColor = "#ff9d00";
 const ballCOR = -0.89; //coefficient of restitution
+const steelCOR = 1; //coefficient of restitution
 const duration = 180;
 
 export {
@@ -24,5 +25,6 @@ export {
   startingPosy,
   ballColor,
   ballCOR,
+  steelCOR,
   ballRadius
 };

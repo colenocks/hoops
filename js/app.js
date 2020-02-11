@@ -136,6 +136,8 @@ window.onload = function() {
       // this.color = color;
       this.hitleft = false;
       this.hittop = false;
+      // this.hitright = false;
+      // this.hitbottom = false;
 
       this.update = function() {
         this.draw();
@@ -151,10 +153,7 @@ window.onload = function() {
   }
 
   let platform, shadow, ball, board, left_rim, right_rim, left_net, right_net;
-  let time = myGlobal.duration;
-  let theta;
-  let vx; /*  13; */
-  let vy; /* 24.8; */
+  let time = myGlobal.duration; //3 Mins
 
   function init() {
     shadow = new myObjects.Circle(0, 0, "#888");
@@ -172,23 +171,19 @@ window.onload = function() {
     right_rim.draw();
     left_net.draw();
     right_net.draw();
-    writeText("Time: " + 180, 10, 30);
+    writeText("Time: " + 180, 10, 30, 18);
   }
 
-  function setValues() {
+  function throwBall() {
     /* ShootBall */
-    //disable controls until vel zero, ball at rest
-    // controller.setAttribute("disable", "true");
     let shootValue = shootBar.getAttribute("value");
     // set --velocity angle
     properties.setAngle(degree);
-    theta = properties.getAngle();
-    console.log("Degree: " + theta);
-    console.log("Velocity: " + shootValue);
+    let angle = properties.getAngle();
 
     // set velocity of ball to powergauge value
-    vx = properties.VelocityX(-55, 26);
-    vy = properties.VelocityY(-55, 26);
+    let vx = properties.VelocityX(-angle, shootValue);
+    let vy = properties.VelocityY(-angle, shootValue);
 
     //set animation to setangle
     // JavaScript animation API
@@ -197,13 +192,13 @@ window.onload = function() {
         transform: "rotate(0deg)"
       },
       {
-        transform: "rotate(" + -theta + "deg)"
+        transform: "rotate(" + -angle + "deg)"
       }
     ];
 
     let reverse = [
       {
-        transform: "rotate(" + -theta + "deg)"
+        transform: "rotate(" + -angle + "deg)"
       },
       {
         transform: "rotate(0deg)"
@@ -215,16 +210,13 @@ window.onload = function() {
       fill: "forwards"
     });
 
-    // if (shootValue > 0) {
     ball = new myObjects.Circle(vx, vy, myGlobal.ballColor);
     vx = 0;
     vy = 0;
-    // let speed = 0;
-    // shootBar.setAttribute("value", speed);
-    // }
   }
 
-  function animate() {
+  let animate = function() {
+    animate.called = true;
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     platform.update();
@@ -234,13 +226,12 @@ window.onload = function() {
     left_net.update();
     right_net.update();
     ball.update();
+    writeText("Time: " + time, 10, 30, 18);
+  };
 
-    writeText("Time: " + time, 10, 30);
-  }
-
-  function writeText(text, x, y) {
+  function writeText(text, x, y, fontsize) {
     ctx.fillStyle = "#fff";
-    ctx.font = "18px Georgia";
+    ctx.font = fontsize + "px Georgia";
     ctx.fillText(text, x, y);
   }
 
@@ -249,6 +240,8 @@ window.onload = function() {
     if (time == 0) {
       clearInterval(clock);
       time = "Time up!";
+      cancelAnimationFrame(animate);
+      writeText("TIME UP" + time, canvas.width / 2, canvas.height / 2, 40);
     }
   }, 1000);
 
@@ -258,9 +251,13 @@ window.onload = function() {
   shootBtn.addEventListener(
     "click",
     function() {
-      setValues();
-
-      animate();
+      let shootValue = shootBar.getAttribute("value");
+      if (shootValue > 0) {
+        throwBall();
+        if (!animate.called) {
+          animate(); //this prevents the FrameRate from inreasing exponentially
+        }
+      }
     },
     false
   );
