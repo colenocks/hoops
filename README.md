@@ -1,5 +1,6 @@
 # Hoops
-### A basketball shooting game
+
+## A basketball shooting game
 
 The game simulates throwing a ball into the basket(hoop) to score a point just as with the basketball sport. The player sets the angle and speed/velocity of the ball with the controls below the canvas or the keyboard and shoots as many shots until the time runs out. 
 
@@ -7,22 +8,21 @@ The game simulates throwing a ball into the basket(hoop) to score a point just a
 
 The application implements the aspects of physics (kinematics) such as collision, velocity, angles, coefficient of restitution, tunnelling etc using the popular formulars of motion, acceleration and pythagorem's theorem. 
 
-## Getting Started
+## Instructions
 
-Clone the Repo and run on your local machine
+1. Clone the Repo on your local machine.
 
-```
-npm install
-```
-Then run
+2. In the root directory, run ```npm install ``` on the terminal.
 
-```
-npm start
-```
+3. Then run ``` npm start ```
+
+4. Enter ``` localhost:3000 ``` into your browser url.
+
 
 ### Prerequisites
 
 1. You need to have the latest versions of node and npm installed on your system.
+
 2. App must be run on a HTML5 canvas compatible browser version.
 
 ## Built With
