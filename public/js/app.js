@@ -2,12 +2,12 @@ import * as projectile from "./projectile.js";
 import * as myGlobal from "./global.js";
 import * as myObjects from "./objects.js";
 
-const canvas = myGlobal.canvas;
-const ctx = myGlobal.ctx;
-canvas.width = myGlobal.canvasWidth;
-canvas.height = myGlobal.canvasHeight;
-
 window.onload = function() {
+  const canvas = myGlobal.canvas;
+  const ctx = myGlobal.ctx;
+  canvas.width = myGlobal.canvasWidth;
+  canvas.height = myGlobal.canvasHeight;
+
   const properties = new projectile.Projectile();
 
   /* Loading Icon From home Page */
@@ -18,7 +18,7 @@ window.onload = function() {
 
   // console.log(rect);
   // console.log(window.scrollY);
-  function loadKobe() {
+  function loadIconKobe() {
     setTimeout(() => {
       loadIcon.style.display = "none";
       loadingPage.style.display = "none";
@@ -26,7 +26,7 @@ window.onload = function() {
     }, 3000);
   }
 
-  loadKobe();
+  loadIconKobe();
 
   /* Make all buttons large on click */
   let button = document.querySelectorAll("button");
@@ -163,6 +163,7 @@ window.onload = function() {
     right_rim = new Rectangle("right_rim", 544, 120, 20, 8, "blue");
     left_net = new Rectangle("left_net", 482, 120, 8, 100, "#fff");
     right_net = new Rectangle("right_net", 536, 120, 8, 100, "#fff");
+
     // Draw to canvas
     shadow.draw();
     platform.draw();
@@ -171,7 +172,7 @@ window.onload = function() {
     right_rim.draw();
     left_net.draw();
     right_net.draw();
-    writeText("Time: " + 180, 10, 30, 18);
+    writeText("Time: " + 90, 10, 30, 18);
   }
 
   function throwBall() {
@@ -235,16 +236,6 @@ window.onload = function() {
     ctx.fillText(text, x, y);
   }
 
-  let clock = setInterval(() => {
-    time--;
-    if (time == 0) {
-      clearInterval(clock);
-      time = "Time up!";
-      cancelAnimationFrame(animate);
-      writeText("TIME UP" + time, canvas.width / 2, canvas.height / 2, 40);
-    }
-  }, 1000);
-
   /* GAME STARTS HERE */
   init();
   let shootBtn = document.querySelector(".shoot");
@@ -261,6 +252,18 @@ window.onload = function() {
     },
     false
   );
+
+  let clock = function() {
+    setInterval(() => {
+      time--;
+      if (time == 0) {
+        clearInterval(clock);
+        time = "Time up!";
+        cancelAnimationFrame(animate);
+        writeText(time, canvas.width / 3, canvas.height / 3, 40);
+      }
+    }, 1000);
+  };
 
   // window.addEventListener(
   //   "keypress",
