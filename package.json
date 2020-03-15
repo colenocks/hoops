@@ -1,0 +1,26 @@
+{
+  "name": "hoops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colenocks/hoops.git"
+  },
+  "author": "Cole Enocks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colenocks/hoops/issues"
+  },
+  "homepage": "https://github.com/colenocks/hoops#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
